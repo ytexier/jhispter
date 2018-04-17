@@ -1,0 +1,15 @@
+version: '2'
+services:
+    dytest-app:
+        image: dytest
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_COUCHBASE_BOOTSTRAP_HOSTS=dytest-couchbase
+            - SPRING_COUCHBASE_BUCKET_NAME=dytest
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    dytest-couchbase:
+        extends:
+            file: couchbase.yml
+            service: dytest-couchbase
