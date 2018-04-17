@@ -1,0 +1,83 @@
+entity Library {
+	libraryName String required,
+    libraryDescription String,
+    libraryCreationDate Instant required,
+    libraryModificationDate Instant,
+    libraryShared Boolean
+}
+
+entity CookBook {
+	cookBookName String required,
+    cookBookDescription String,
+    cookBookCreationDate Instant required,
+    cookBookModificationDate Instant,
+    cookBookShared Boolean
+}
+
+entity Recipe {
+	recipeName String required,
+    recipeDescription String,
+    recipeCreationDate Instant required,
+    recipeModificationDate Instant,
+    recipeCertified Boolean,
+    recipeCetificationAutor String,
+    recipeCertificationStartDate Instant,
+    recipeShared Boolean
+}
+
+entity RecipeAppreciation {
+	recipeAppreciationAutor String required,
+	recipeAppreciationVoteValue Integer min(0) max(5),
+    recipeAppreciationComment String,
+}
+
+entity Ingredient {
+	ingredientName String required,
+    ingredientDescription String,
+    ingredientEnum IngredientTypeEnum required,
+}
+
+entity IngredientAppreciation {
+	ingredientAppreciationAutor String required,
+	ingredientAppreciationVoteValue Integer min(0) max(5),
+    ingredientAppreciationComment String,
+}
+
+enum IngredientTypeEnum {
+    BASE, BOOSTER, FLAVOR, ADDITIVE
+}
+
+entity Brand {
+	brandName String required,
+    brandDescription String,
+    brandLogo Blob
+}
+
+relationship OneToMany {
+	//
+	Library{cookBook} to CookBook,
+	//
+	CookBook{recipe} to Recipe,
+    //
+    Brand{ingredient} to Ingredient,
+    //
+    Recipe{vote} to RecipeAppreciation,
+    //
+    Ingredient{vote} to IngredientAppreciation
+}
+
+relationship ManyToMany {
+	//
+	Recipe{} to Ingredient{}
+}
+
+// Set pagination options
+paginate Library, CookBook, Recipe, Ingredient, Brand with infinite-scroll
+paginate Job with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+angularSuffix * with angular
