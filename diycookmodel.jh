@@ -61,9 +61,9 @@ relationship OneToMany {
     //
     Brand{ingredient} to Ingredient,
     //
-    Recipe{vote} to RecipeAppreciation,
+    Recipe{recipeAppreciation} to RecipeAppreciation,
     //
-    Ingredient{vote} to IngredientAppreciation
+    Ingredient{ingredientAppreciation} to IngredientAppreciation
 }
 
 relationship ManyToMany {
@@ -72,8 +72,7 @@ relationship ManyToMany {
 }
 
 // Set pagination options
-paginate Library, CookBook, Recipe, Ingredient, Brand with infinite-scroll
-paginate Job with pagination
+paginate Ingredient, Brand with infinite-scroll
 
 dto * with mapstruct
 
