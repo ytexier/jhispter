@@ -28,19 +28,19 @@ entity Recipe {
 entity RecipeAppreciation {
 	recipeAppreciationAutor String required,
 	recipeAppreciationVoteValue Integer min(0) max(5),
-    recipeAppreciationComment String,
+    recipeAppreciationComment String
 }
 
 entity Ingredient {
 	ingredientName String required,
     ingredientDescription String,
-    ingredientEnum IngredientTypeEnum required,
+    ingredientEnum IngredientTypeEnum required
 }
 
 entity IngredientAppreciation {
 	ingredientAppreciationAutor String required,
 	ingredientAppreciationVoteValue Integer min(0) max(5),
-    ingredientAppreciationComment String,
+    ingredientAppreciationComment String
 }
 
 enum IngredientTypeEnum {
